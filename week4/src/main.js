@@ -83,8 +83,16 @@ window.addEventListener('resize', () => {
   renderer.setSize(sizes.width, sizes.height);
 });
 
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
-camera.position.set(1, 1, 2);
+const aspectRatio = sizes.width / sizes.height;
+const camera = new THREE.OrthographicCamera(
+  -1 * aspectRatio,  // left
+  1 * aspectRatio,   // right
+  1,                 // top
+  -1,                // bottom
+  0.1,               // near
+  100                // far
+);
+camera.position.z = 3;
 scene.add(camera);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
